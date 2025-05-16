@@ -111,7 +111,18 @@ public class HelloFX extends Application {
 }
 ```
 
-### Schritt 5: Projekt öffnen und starten
+### Schritt 5: launch.json finden oder erstellen
+
+Die Datei `.vscode/launch.json` befindet sich im Projektverzeichnis unter `.vscode`. Falls sie nicht existiert:
+
+1. Öffne dein Projekt in VS Code
+2. Klicke auf das Run-Symbol links (▶ oder `Strg+Shift+D`)
+3. Wähle **„create a launch.json file“**
+4. Wähle **„Java“** als Umgebung
+5. VS Code erstellt nun automatisch `.vscode/launch.json`
+6. Ersetze den Inhalt wie oben beschrieben
+
+### Schritt 6: Projekt öffnen und starten
 
 1. Öffne das Projektverzeichnis in VS Code
 2. Öffne die Datei `HelloFX.java`
