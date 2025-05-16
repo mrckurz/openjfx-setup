@@ -4,7 +4,7 @@ Dieser Leitfaden beschreibt, wie man JavaFX auf **Windows**, **macOS** und **Lin
 
 ## Voraussetzungen
 
-- Java Development Kit (JDK) 17 oder neuer (https://adoptium.net)
+- Java Development Kit (JDK) 17 oder neuer
 - JavaFX SDK (https://openjfx.io)
 
 ## JavaFX SDK herunterladen
