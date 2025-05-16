@@ -4,7 +4,7 @@ Dieser Leitfaden beschreibt, wie man JavaFX auf **Windows**, **macOS** und **Lin
 
 ## Voraussetzungen
 
-- Java Development Kit (JDK) 17 oder neuer
+- Java Development Kit (JDK) 17 oder neuer (https://adoptium.net)
 - JavaFX SDK (https://openjfx.io)
 
 ## JavaFX SDK herunterladen
@@ -46,16 +46,44 @@ Pfad ist z. B. `/Users/deinbenutzername/javafx-sdk/lib`
 ### Schritt 2: Extensions installieren
 - Java Extension Pack
 - Debugger for Java
+- Maven for Java (optional, wenn Maven verwendet wird)
 
 ### Schritt 3: Projektstruktur erstellen
 
 ```bash
 mkdir javafx-vscode
 cd javafx-vscode
-mkdir -p src
+mkdir -p src/hellofx .vscode
 ```
 
-### Schritt 4: `launch.json` und `settings.json` konfigurieren
+Speichere folgendes als `src/hellofx/HelloFX.java`:
+
+```java
+package hellofx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class HelloFX extends Application {
+    @Override
+    public void start(Stage stage) {
+        Label label = new Label("Hello, JavaFX!");
+        Scene scene = new Scene(new StackPane(label), 400, 200);
+        stage.setScene(scene);
+        stage.setTitle("HelloFX");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+```
+
+### Schritt 4: VS Code konfigurieren
 
 **.vscode/launch.json**
 ```json
@@ -66,6 +94,7 @@ mkdir -p src
       "type": "java",
       "name": "Launch JavaFX",
       "request": "launch",
+      "mainClass": "hellofx.HelloFX",
       "vmArgs": "--module-path /Pfad/zum/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml"
     }
   ]
@@ -75,11 +104,20 @@ mkdir -p src
 **.vscode/settings.json**
 ```json
 {
+  "java.project.sourcePaths": ["src"],
   "java.project.referencedLibraries": [
     "/Pfad/zum/javafx-sdk/lib/**/*.jar"
   ]
 }
 ```
+
+### Schritt 5: Projekt öffnen und starten
+
+1. Öffne das Projektverzeichnis in VS Code
+2. Öffne die Datei `HelloFX.java`
+3. Klicke auf **Run** über der `main`-Methode oder drücke `F5`
+
+**Hinweis:** Der Pfad zur JavaFX-SDK muss zum System und Ort der Entpackung passen.
 
 ---
 
