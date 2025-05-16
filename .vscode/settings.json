@@ -1,0 +1,9 @@
+{
+  "java.project.sourcePaths": [
+    "javafx-vscode/src/hellofx"
+],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": [
+    "/Users/marckurz/javafx-sdk-20.0.1/lib/**/*.jar"
+  ]
+}
