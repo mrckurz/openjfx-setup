@@ -1,6 +1,6 @@
 # JavaFX Setup Guide
 
-Dieser Leitfaden beschreibt, wie man JavaFX auf **Windows**, **macOS** und **Linux** für die Entwicklungsumgebungen **Eclipse**, **VS Code** und **IntelliJ IDEA** einrichtet. Am Ende findest du ein kleines Beispielprogramm.
+Dieser Leitfaden beschreibt die Einrichtung von JavaFX auf **Windows**, **macOS** und **Linux** für die Entwicklungsumgebungen **Eclipse**, **VS Code** und **IntelliJ IDEA**. Am Ende findest du ein vollständiges Beispielprogramm.
 
 ## Voraussetzungen
 
@@ -10,45 +10,50 @@ Dieser Leitfaden beschreibt, wie man JavaFX auf **Windows**, **macOS** und **Lin
 ## JavaFX SDK herunterladen
 
 1. Gehe zu https://openjfx.io
-2. Lade das passende SDK für dein Betriebssystem herunter
-3. Entpacke es an einen gut erreichbaren Ort (z. B. `C:\javafx-sdk` oder `~/javafx-sdk`)
+2. Wähle den passenden Download für dein Betriebssystem
+3. Entpacke den Inhalt in ein gut erreichbares Verzeichnis, z. B.:
+   - Windows: `C:\javafx-sdk-20.0.1`
+   - macOS: `/Users/deinname/javafx-sdk-20.0.1`
+   - Linux: `~/javafx-sdk-20.0.1`
 
 ---
 
 ## 1. Einrichtung unter Eclipse
 
-### Schritt 1: Eclipse installieren
-- https://www.eclipse.org/downloads/
-- Wähle "Eclipse IDE for Java Developers"
+### Eclipse installieren
+- Download: https://www.eclipse.org/downloads/
+- Version: „Eclipse IDE for Java Developers“
 
-### Schritt 2: JavaFX in Eclipse konfigurieren
+### Neues Projekt anlegen
+1. Datei → Neues Java-Projekt
+2. Projektname vergeben
 
-1. Neues Java-Projekt erstellen
-2. Rechtsklick auf das Projekt → **Properties** → **Java Build Path**
-3. Unter **Libraries** → **Add External JARs...**
-   - Wähle alle JAR-Dateien im Ordner `javafx-sdk/lib`
-4. Unter **Run Configurations** → **VM arguments**:
+### JavaFX Bibliotheken einbinden
+1. Rechtsklick auf Projekt → **Properties**
+2. Unter **Java Build Path** → **Libraries** → **Add External JARs**
+3. Alle `.jar`-Dateien aus `javafx-sdk/lib` hinzufügen
 
-   ```
-   --module-path /Pfad/zum/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml
-   ```
+### VM-Optionen setzen
+1. Rechtsklick auf Projekt → **Run As → Run Configurations**
+2. Im Tab **Arguments** → **VM arguments** einfügen:
 
-### macOS Hinweis:
-Pfad ist z. B. `/Users/deinbenutzername/javafx-sdk/lib`
+```
+--module-path /Pfad/zum/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml
+```
 
 ---
 
 ## 2. Einrichtung unter VS Code
 
-### Schritt 1: VS Code installieren
+### VS Code installieren
 - https://code.visualstudio.com
 
-### Schritt 2: Extensions installieren
+### Extensions installieren
 - Java Extension Pack
 - Debugger for Java
-- Maven for Java (optional, wenn Maven verwendet wird)
+- (optional) Maven for Java
 
-### Schritt 3: Projektstruktur erstellen
+### Projektstruktur vorbereiten
 
 ```bash
 mkdir javafx-vscode
@@ -56,7 +61,7 @@ cd javafx-vscode
 mkdir -p src/hellofx .vscode
 ```
 
-Speichere folgendes als `src/hellofx/HelloFX.java`:
+### Beispielprogramm speichern unter `src/hellofx/HelloFX.java`
 
 ```java
 package hellofx;
@@ -83,9 +88,20 @@ public class HelloFX extends Application {
 }
 ```
 
-### Schritt 4: VS Code konfigurieren
+### `.vscode/settings.json`
 
-**.vscode/launch.json**
+```json
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": [
+    "/Pfad/zur/javafx-sdk/lib/**/*.jar"
+  ]
+}
+```
+
+### `.vscode/launch.json`
+
 ```json
 {
   "version": "0.2.0",
@@ -95,97 +111,68 @@ public class HelloFX extends Application {
       "name": "Launch JavaFX",
       "request": "launch",
       "mainClass": "hellofx.HelloFX",
-      "vmArgs": "--module-path /Pfad/zum/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml"
+      "vmArgs": "--module-path /Pfad/zur/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml"
     }
   ]
 }
 ```
 
-**.vscode/settings.json**
-```json
-{
-  "java.project.sourcePaths": ["src"],
-  "java.project.referencedLibraries": [
-    "/Pfad/zum/javafx-sdk/lib/**/*.jar"
-  ]
-}
-```
+### Starten
 
-### Schritt 5: launch.json finden oder erstellen
-
-Die Datei `.vscode/launch.json` befindet sich im Projektverzeichnis unter `.vscode`. Falls sie nicht existiert:
-
-1. Öffne dein Projekt in VS Code
-2. Klicke auf das Run-Symbol links (▶ oder `Strg+Shift+D`)
-3. Wähle **„create a launch.json file“**
-4. Wähle **„Java“** als Umgebung
-5. VS Code erstellt nun automatisch `.vscode/launch.json`
-6. Ersetze den Inhalt wie oben beschrieben
-
-### Schritt 6: Projekt öffnen und starten
-
-1. Öffne das Projektverzeichnis in VS Code
-2. Öffne die Datei `HelloFX.java`
-3. Klicke auf **Run** über der `main`-Methode oder drücke `F5`
-
-**Hinweis:** Der Pfad zur JavaFX-SDK muss zum System und Ort der Entpackung passen.
+- Öffne die Datei `HelloFX.java` in VS Code
+- Klicke auf „Run“ oberhalb der `main`-Methode oder drücke `F5`
 
 ---
 
 ## 3. Einrichtung unter IntelliJ IDEA
 
-### Schritt 1: IntelliJ installieren
+### IntelliJ installieren
 - https://www.jetbrains.com/idea/
 
-### Schritt 2: JavaFX-Projekt einrichten
+### Neues Projekt erstellen
+1. Neues Projekt → Java
+2. Projekt SDK auswählen (z. B. JDK 19)
 
-1. Neues Projekt → **JavaFX**
-2. In **Project Structure** (Strg+Alt+Shift+S)
-   - Unter **Libraries** → **+** → Java
-   - Wähle `javafx-sdk/lib`
-3. Unter **Run/Debug Configurations** → VM options:
+### JavaFX Bibliothek hinzufügen
+1. **File → Project Structure** (`Cmd+,` oder `Strg+Alt+Shift+S`)
+2. Reiter **Libraries** → „+“ → **Java**
+3. Pfad zu `javafx-sdk/lib` auswählen
 
-   ```
-   --module-path /Pfad/zum/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml
-   ```
+### VM Optionen setzen
+1. Run → Edit Configurations
+2. Im Feld **VM options** einfügen:
 
----
-
-## Beispielprogramm
-
-**Datei:** `src/Main.java`
-
-```java
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-public class Main extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(label, 300, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("JavaFX Example");
-        primaryStage.show();
-    }
-}
 ```
+--module-path /Pfad/zur/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml
+```
+
+### Beispielklasse hinzufügen
+
+Datei → Neue Java-Klasse `HelloFX` mit Inhalt:
+
+*(siehe oben unter VS Code Beispiel)*
 
 ---
 
 ## Hinweise
 
-- Pfadangaben sind betriebssystemspezifisch:
-  - Windows: `C:\\javafx-sdk\\lib`
-  - macOS/Linux: `/Users/benutzername/javafx-sdk/lib`
-- Benutze Doppelpunkte `:` statt Semikolons `;` auf macOS/Linux in VM options (nur bei Shell-Eingaben relevant)
+- **Pfadangaben sind betriebssystemspezifisch:**
+  - Windows: `C:\javafx-sdk\lib`
+  - macOS/Linux: `/Users/deinname/javafx-sdk/lib`
+- Bei **Spaces im Pfad** (z. B. `Application Support`) müssen Anführungszeichen gesetzt werden
+- Wenn du ein Modulprojekt nutzt, füge eine `module-info.java` hinzu:
+
+```java
+module hellofx {
+    requires javafx.controls;
+    requires javafx.fxml;
+    exports hellofx;
+}
+```
 
 ---
 
-Bei Problemen siehe: https://openjfx.io/openjfx-docs/
+## Weiterführende Links
+
+- [JavaFX Documentation](https://openjfx.io/openjfx-docs/)
+- [OpenJFX GitHub Examples](https://github.com/openjfx/samples)

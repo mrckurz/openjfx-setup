@@ -9,8 +9,10 @@ import javafx.stage.Stage;
 public class HelloFX extends Application {
     @Override
     public void start(Stage stage) {
-        Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(new StackPane(label), 400, 200);
+        String javafxVersion = System.getProperty("javafx.version");
+        String javaVersion = System.getProperty("java.version");
+        Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(label), 640, 480);
         stage.setScene(scene);
         stage.setTitle("HelloFX");
         stage.show();
